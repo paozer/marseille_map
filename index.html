@@ -1,0 +1,63 @@
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+    <head profile="http://gmpg.org/xfn/11">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v1.7.1/leaflet.css" />
+
+        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+        <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v1.7.1/leaflet.js'></script>
+    </head>
+
+    <body>
+        <div id="map" style="height: 100%; width: 100%; border: 1px solid #AAA;"></div>
+
+        <script type='text/javascript' src='markers.js'></script>
+        <script text='text/javascript'>
+
+            var bounds = [[0,0], [12,19]];
+
+            var map = L.map('map', {
+                            minZoom: 6,
+                            maxZoom: 8,
+                            zoom: 7,
+                            zoomDelta: 0.5,
+                            zoomSnap: 0.5,
+                            maxBounds: bounds,
+                            crs: L.CRS.Simple
+                        });
+
+            var url = 'maps/original_map.png';
+            var image = L.imageOverlay(url, bounds).addTo(map);
+
+            function markerClickEvent(marker)
+            {
+                map.setMaxBounds(null);
+                //map.setView(marker.latlng, 8);
+                marker.layer.getPopup().update();
+
+                for ( var i = 0; i < markers.length; ++i) {
+                    if (marker.latlng.equals(L.latLng(markers[0].lat, markers[0].lng))) {
+                        var audio = new Audio(markers[i].audio);
+                        audio.play();
+                    }
+                }
+            }
+
+            function markerCloseEvent()
+            {
+                map.setMaxBounds(bounds);
+            }
+
+            for ( var i = 0; i < markers.length; ++i) {
+                var marker = L.marker([markers[i].lat, markers[i].lng]).addTo(map);
+                marker.bindPopup('<p>' + markers[i].text + '</p>' +  '<img src="' + markers[i].img + '" alt="' + markers[i].alt + '" width="' + markers[i].width+ '" height="' + markers[i].heigth + '">', { maxWidth: "auto" });
+                marker.on('click', markerClickEvent)
+                marker.on('popupclose', markerCloseEvent);
+            }
+
+            map.setView([0,10]);
+            //map.fitBounds([[6,6], [0,13]]);
+
+        </script>
+    </body>
+</html>
