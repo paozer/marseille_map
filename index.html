@@ -2,62 +2,18 @@
     <head profile="http://gmpg.org/xfn/11">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-        <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v1.7.1/leaflet.css" />
-
-        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
-        <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v1.7.1/leaflet.js'></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
     </head>
 
     <body>
+        <style>.leaflet-fade-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-zoom-animated { will-change:auto !important; }</style>
         <div id="map" style="height: 100%; width: 100%; border: 1px solid #AAA;"></div>
-
         <script type='text/javascript' src='markers.js'></script>
-        <script text='text/javascript'>
-
-            var bounds = [[0,0], [12,19]];
-
-            var map = L.map('map', {
-                            minZoom: 6,
-                            maxZoom: 8,
-                            zoom: 7,
-                            zoomDelta: 0.5,
-                            zoomSnap: 0.5,
-                            maxBounds: bounds,
-                            crs: L.CRS.Simple
-                        });
-
-            var url = 'maps/original_map.png';
-            var image = L.imageOverlay(url, bounds).addTo(map);
-
-            function markerClickEvent(marker)
-            {
-                map.setMaxBounds(null);
-                //map.setView(marker.latlng, 8);
-                marker.layer.getPopup().update();
-
-                for ( var i = 0; i < markers.length; ++i) {
-                    if (marker.latlng.equals(L.latLng(markers[0].lat, markers[0].lng))) {
-                        var audio = new Audio(markers[i].audio);
-                        audio.play();
-                    }
-                }
-            }
-
-            function markerCloseEvent()
-            {
-                map.setMaxBounds(bounds);
-            }
-
-            for ( var i = 0; i < markers.length; ++i) {
-                var marker = L.marker([markers[i].lat, markers[i].lng]).addTo(map);
-                marker.bindPopup('<p>' + markers[i].text + '</p>' +  '<img src="' + markers[i].img + '" alt="' + markers[i].alt + '" width="' + markers[i].width+ '" height="' + markers[i].heigth + '">', { maxWidth: "auto" });
-                marker.on('click', markerClickEvent)
-                marker.on('popupclose', markerCloseEvent);
-            }
-
-            map.setView([0,10]);
-            //map.fitBounds([[6,6], [0,13]]);
-
-        </script>
+        <script type='text/javascript' src='map.js'></script>
     </body>
 </html>
