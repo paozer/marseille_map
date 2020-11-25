@@ -27,6 +27,22 @@ for ( var i = 0; i < markers.length; ++i) {
 map.on('popupclose', markerCloseEvent);
 map.setView([0,10]);
 
+// bigup to ghybs on sf
+document.querySelector(".leaflet-popup-pane").addEventListener("load",
+    function (event) {
+        var tagName = event.target.tagName;
+        var popup = map._popup;
+
+        if (tagName === "IMG" && popup && !popup._updated) {
+            popup.update();
+            popup._updated = true;
+        }
+    },
+    true
+);
+
+var previous_zoom;
+
 function markerOpenEvent(e)
 {
     map.setMaxBounds(null)
