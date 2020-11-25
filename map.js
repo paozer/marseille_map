@@ -1,5 +1,6 @@
 var bounds = [[0,0], [12,19]];
 var url = 'maps/original_map.png';
+var audio = new Audio();
 
 var map = L.map('map', {
     minZoom: 6,
@@ -17,13 +18,13 @@ for ( var i = 0; i < markers.length; ++i) {
     L.marker([markers[i].lat, markers[i].lng])
         .addTo(map)
         .bindPopup('<p>' + markers[i].text + '</p>' +
-            '<img src="' + markers[i].img + '" alt="' + markers[i].alt + '" width="' + markers[i].width+ '" height="' + markers[i].heigth + '">'
+            '<img src="' + markers[i].img + '" alt="' + markers[i].alt +
+            '" width="' + markers[i].width+ '" height="' + markers[i].heigth + '">'
             , { maxWidth: "auto", keepInView: "true" })
         .on('click', markerOpenEvent);
 }
 
-map.on('popupclose', function(e) { map.setMaxBounds(bounds); });
-
+map.on('popupclose', markerCloseEvent);
 map.setView([0,10]);
 
 function markerOpenEvent(e)
@@ -32,9 +33,15 @@ function markerOpenEvent(e)
     map.setView(e.latlng, 7.5);
 
     for ( var i = 0; i < markers.length; ++i) {
-        if (e.latlng.equals(L.latLng(markers[0].lat, markers[0].lng))) {
-            var audio = new Audio(markers[i].audio);
+        if (e.latlng.equals(L.latLng(markers[i].lat, markers[i].lng))) {
+            audio.src = markers[i].audio;
             audio.play();
         }
     }
+}
+
+function markerCloseEvent(e)
+{
+    audio.pause();
+    map.setMaxBounds(bounds);
 }
