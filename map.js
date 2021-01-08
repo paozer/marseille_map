@@ -14,13 +14,12 @@ var map = L.map('map', {
 L.imageOverlay(url, bounds).addTo(map);
 
 for ( var i = 0; i < markers.length; ++i) {
-    L.marker([markers[i].lat, markers[i].lng])
-        .addTo(map)
-        .bindPopup('<p>' + markers[i].text + '</p>' +
-            '<img src="' + markers[i].img + '" alt="' + markers[i].alt +
-            '" width="' + markers[i].width+ '" height="' + markers[i].heigth + '">'
-            , { maxWidth: "auto", keepInView: "true" }) //keepInView may produce bug of flyback after overeaching popup
-        .on('click', markerOpenEvent);
+    var m = L.marker([markers[i].lat, markers[i].lng]).addTo(map)
+    m.bindPopup(
+        '<p><b>' + markers[i].title + '</b></p>' +
+        '<img src="' + markers[i].img + '" ' + '">'
+        , { maxWidth: "auto", keepInView: "true" })
+    m.on('click', markerOpenEvent);
 }
 
 map.on('popupclose', markerCloseEvent);
