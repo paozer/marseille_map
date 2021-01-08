@@ -14,16 +14,15 @@ var map = L.map('map', {
 L.imageOverlay(url, bounds).addTo(map);
 
 for ( var i = 0; i < markers.length; ++i) {
-    var m = L.marker([markers[i].lat, markers[i].lng]).addTo(map)
-    m.bindPopup(
-        '<p><b>' + markers[i].title + '</b></p>' +
-        '<img src="' + markers[i].img + '" ' + '">'
-        , { maxWidth: "auto", keepInView: "true" })
-    m.on('click', markerOpenEvent);
+    L.marker([markers[i].lat, markers[i].lng]).addTo(map)
+        .bindPopup(
+            '<center><p><b>' + markers[i].title + '</b></p></center>' +
+            '<a href="' + markers[i].img_src + '" target="_blank" rel="noopener noreferrer">' +
+            '<img src="' + markers[i].img + '"' + '>' +
+            '</a>'
+            , { maxWidth: "auto", keepInView: "true" })
+        .on('click', markerOpenEvent);
 }
-
-map.on('popupclose', markerCloseEvent);
-map.setView([0,10]);
 
 // bigup to ghybs on so
 document.querySelector(".leaflet-popup-pane").addEventListener("load",
@@ -38,6 +37,9 @@ document.querySelector(".leaflet-popup-pane").addEventListener("load",
     },
     true
 );
+
+map.on('popupclose', markerCloseEvent);
+map.setView([0,10]);
 
 var prev_bounds;
 var audio = new Audio();
