@@ -15,7 +15,8 @@ var map = L.map('map', {
     zoomDelta: 0.5,
     zoomSnap: 0.5,
     maxBounds: bounds,
-    crs: L.CRS.Simple
+    crs: L.CRS.Simple,
+    tap: false // fixes safari double event bug on popup open
 });
 
 L.imageOverlay(url, bounds).addTo(map);
