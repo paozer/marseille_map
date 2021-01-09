@@ -1,6 +1,13 @@
 var bounds = [[0,0], [12,19]];
 var url = 'maps/original_map.png';
 
+var pinIcon = L.icon({
+    iconUrl: 'images/marker_icon.png',
+    iconSize:     [30, 33],
+    iconAnchor:   [7, 33],
+    popupAnchor:  [0, -33]
+});
+
 var map = L.map('map', {
     minZoom: 6,
     maxZoom: 8,
@@ -13,8 +20,8 @@ var map = L.map('map', {
 
 L.imageOverlay(url, bounds).addTo(map);
 
-for ( var i = 0; i < markers.length; ++i) {
-    L.marker([markers[i].lat, markers[i].lng]).addTo(map)
+for ( var i = 0; i < markers.length; ++i ) {
+    L.marker([markers[i].lat, markers[i].lng], { icon: pinIcon }).addTo(map)
         .bindPopup(
             '<center><p><b>' + markers[i].title + '</b></p></center>' +
             '<a href="' + markers[i].img_src + '" target="_blank" rel="noopener noreferrer">' +
@@ -50,7 +57,7 @@ function markerOpenEvent(e)
     map.setMaxBounds(null);
     map.flyTo(e.latlng, Math.max(map.getZoom(), 7.5));
 
-    for ( var i = 0; i < markers.length; ++i) {
+    for ( var i = 0; i < markers.length; ++i ) {
         if (e.latlng.equals(L.latLng(markers[i].lat, markers[i].lng))) {
             audio.src = markers[i].audio;
             audio.play();
