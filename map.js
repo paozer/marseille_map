@@ -49,6 +49,8 @@ document.querySelector(".leaflet-popup-pane").addEventListener("load",
 map.on('popupclose', markerCloseEvent);
 map.setView([0,10]);
 
+//alert("Anmerkungen:\nDie Photographien dienen der Veranschaulichung der erwähnten Orte und sind - durch fehlende Quellen - nicht immer an den exakten Orten des Geschehens in Anna Seghers Roman Transit gebunden. Des weiteren sind zeitliche Variationen bzw. nicht genau feststellbare Daten der Aufnahmen möglich.\n\nDiese Karte wurde als Anhang einer Studienleistung über „die Bedeutung der Stadt Marseilles im Roman Transit von Anna Seghers“ im Rahmen eines von Prof. Dr. Claudia Albert (FU Berlin) geleiteten Seminars: „Sprache und Exil“ im Sommersemester 2019 an der Freien Universität Berlin erstellt und war nicht Bestandteil der Prüfung. Diese Karte dient der Veranschaulichung des Lebens des Protagonisten im Roman Transit von Anna Seghers. Sie sollte als Ergänzung bzw. Veranschaulichung des im Roman Beschriebenen Marseilles verstanden werden nicht als eigenständiges Objekt.\n\nMitwirkende:\nPrimärtext: Anna Seghers, Transit, Aufbau Verlag, Berlin (2018)\nIdee, Konzeption und Recherche : Lucie David\nProgrammierung: Paolo Ramella-Ratin, Lucie David\nStimme: Louise Otterbein");
+
 var prev_bounds;
 var audio = new Audio();
 
