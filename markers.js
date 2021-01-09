@@ -90,10 +90,10 @@ markers = [
         "lng": 8.45
     },
     {
-        "title": "Hotel Augame - Rue du Relais",
+        "title": "Hotel Aumage - Rue du Relais",
         "text": "",
-        "audio": "audio/example.mp3",
-        "img": "images/11_Hotel_Augame_Rue_du_Relais.png",
+        "audio": "audio/11_Hotel_Aumage_Rue_du_Relais.mp3",
+        "img": "images/11_Hotel_Aumage_Rue_du_Relais.png",
         "img_src": "https://www.tourisme-marseille.com/wp-content/uploads/2017/10/plaque-a-memoire-evacues-vieux-port-de-1943-rafle-de-marseille-2-10-848x566.jpg",
         "lat": 5.85,
         "lng": 8.88
