@@ -26,9 +26,8 @@ for ( var i = 0; i < markers.length; ++i ) {
         .bindPopup(
             '<center><p><b>' + markers[i].title + '</b></p></center>' +
             '<a href="' + markers[i].img_src + '" target="_blank" rel="noopener noreferrer">' +
-            '<img src="' + markers[i].img + '"' + '>' +
-            '</a>'
-            , { maxWidth: "auto", keepInView: "true" })
+            '<img src="' + markers[i].img + '"' + '>' + '</a>'
+            , { maxWidth: "auto", autoPan: "false", keepInView: "false" })
         .on('click', markerOpenEvent);
 }
 
@@ -49,7 +48,7 @@ document.querySelector(".leaflet-popup-pane").addEventListener("load",
 map.on('popupclose', markerCloseEvent);
 map.setView([0,10]);
 
-//alert("Anmerkungen:\nDie Photographien dienen der Veranschaulichung der erwähnten Orte und sind - durch fehlende Quellen - nicht immer an den exakten Orten des Geschehens in Anna Seghers Roman Transit gebunden. Des weiteren sind zeitliche Variationen bzw. nicht genau feststellbare Daten der Aufnahmen möglich.\n\nDiese Karte wurde als Anhang einer Studienleistung über „die Bedeutung der Stadt Marseilles im Roman Transit von Anna Seghers“ im Rahmen eines von Prof. Dr. Claudia Albert (FU Berlin) geleiteten Seminars: „Sprache und Exil“ im Sommersemester 2019 an der Freien Universität Berlin erstellt und war nicht Bestandteil der Prüfung. Diese Karte dient der Veranschaulichung des Lebens des Protagonisten im Roman Transit von Anna Seghers. Sie sollte als Ergänzung bzw. Veranschaulichung des im Roman Beschriebenen Marseilles verstanden werden nicht als eigenständiges Objekt.\n\nMitwirkende:\nPrimärtext: Anna Seghers, Transit, Aufbau Verlag, Berlin (2018)\nIdee, Konzeption und Recherche : Lucie David\nProgrammierung: Paolo Ramella-Ratin, Lucie David\nStimme: Louise Otterbein");
+alert("Anmerkungen:\n\nDie Photographien dienen der Veranschaulichung der erwähnten Orte und sind - durch fehlende Quellen - nicht immer an die exakten Orten des Geschehens in Anna Seghers Roman Transit gebunden. Des Weiteren sind zeitliche Variationen bzw. nicht genau feststellbare Daten der Aufnahmen möglich.\n\nDiese Karte wurde als Anhang einer Studienleistung über „die Bedeutung der Stadt Marseilles im Roman Transit von Anna Seghers“ im Rahmen eines von Prof. Dr. Claudia Albert (FU Berlin) geleiteten Seminars: „Sprache und Exil“ im Sommersemester 2019 an der Freien Universität Berlin erstellt und war nicht Bestandteil der Prüfung. Diese Karte dient der Veranschaulichung des Lebens des Protagonisten im Roman Transit von Anna Seghers. Sie sollte als Ergänzung bzw. Veranschaulichung des im Roman beschriebenen Marseilles verstanden werden, nicht als eigenständiges Objekt.\n\nPrimärtext: Anna Seghers, Transit, Aufbau Verlag, Berlin (2018)\n\nMitwirkende:\nIdee, Konzeption und Recherche : Lucie David (Freie Universität Berlin)\nProgrammierung: Paolo Ramella-Ratin (42 Lyon, Karlsruher Institut für Technologie), Lucie David\nStimme: Louise Otterbein (Freie Universität Berlin)");
 
 var prev_bounds;
 var audio = new Audio();
@@ -57,7 +56,6 @@ var audio = new Audio();
 function markerOpenEvent(e)
 {
     prev_bounds = map.getBounds();
-    map.setMaxBounds(null);
     map.flyTo(e.latlng, Math.max(map.getZoom(), 7.5));
 
     for ( var i = 0; i < markers.length; ++i ) {
@@ -70,7 +68,6 @@ function markerOpenEvent(e)
 
 function markerCloseEvent(e)
 {
-    map.setMaxBounds(bounds);
     map.flyToBounds(prev_bounds);
     audio.pause();
 }
