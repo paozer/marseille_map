@@ -26,8 +26,8 @@ for ( var i = 0; i < markers.length; ++i ) {
         .bindPopup(
             '<center><p><b>' + markers[i].title + '</b></p></center>' +
             '<a href="' + markers[i].img_src + '" target="_blank" rel="noopener noreferrer">' +
-            '<img src="' + markers[i].img + '"' + '>' + '</a>'
-            , { maxWidth: "auto", autoPan: "false", keepInView: "false" })
+            '<img src="' + markers[i].img + '"' + '>' + '</a>' + markers[i].text
+            , { maxWidth: 500, maxHeight: 700, autoPan: "false", keepInView: "false" })
         .on('click', markerOpenEvent);
 }
 
