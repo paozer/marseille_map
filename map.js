@@ -25,11 +25,27 @@ for ( var i = 0; i < markers.length; ++i ) {
     L.marker([markers[i].lat, markers[i].lng], { icon: pinIcon }).addTo(map)
         .bindPopup(
             '<center><p><b>' + markers[i].title + '</b></p></center>' +
-            '<a href="' + markers[i].img_src + '" target="_blank" rel="noopener noreferrer">' +
-            '<img src="' + markers[i].img + '"' + '>' + '</a>' + markers[i].text
+            '<div id="'+ markers[i].name +'">' +
+            '<button onclick="switchPopupContent(\'' + markers[i].name + '\', \'text\')">Mitlesen</button>' +
+            '<p><a href="' + markers[i].img_src + '" target="_blank" rel="noopener noreferrer">' + '<img src="' + markers[i].img + '"' + '>' + '</a></p>' +
+            '</div>'
             , { maxWidth: 500, maxHeight: 700, autoPan: "false", keepInView: "false" })
         .on('click', markerOpenEvent);
 }
+
+function switchPopupContent(marker, image_or_text)
+{
+    div = document.getElementById(marker);
+    for ( var i = 0; i < markers.length; ++i ) {
+        if (marker === markers[i].name && image_or_text === "text") {
+            div.innerHTML = '<button onclick="switchPopupContent(\'' + markers[i].name + '\', \'image\')">Mitgucken</button>' +  '<p>' + markers[i].text + '<\p>';
+        }
+        else if (marker === markers[i].name && image_or_text === "image") {
+            div.innerHTML = '<button onclick="switchPopupContent(\'' + markers[i].name + '\', \'text\')">Mitlesen</button>' + '<p><a href="' + markers[i].img_src + '" target="_blank" rel="noopener noreferrer">' + '<img src="' + markers[i].img + '"' + '>' + '</a></p>';
+        }
+    }
+}
+
 
 // bigup to ghybs on so
 document.querySelector(".leaflet-popup-pane").addEventListener("load",
