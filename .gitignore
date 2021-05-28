@@ -2,3 +2,5 @@
 audio/
 images/
 maps/
+tags
+.gitignore
