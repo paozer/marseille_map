@@ -1,5 +1,5 @@
 var bounds = [[0,0], [12,19]];
-var url = 'maps/original_map.png';
+var url = 'maps/original_map.jpg';
 
 var pinIcon = L.icon({
     iconUrl: 'images/marker_icon.png',
