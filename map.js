@@ -28,24 +28,19 @@ markers.forEach((m) => {
   L.marker([m.lat, m.lng], { icon: pinIcon })
     .addTo(map)
     .bindPopup(
-      "<center><p><b>" +
-        m.title +
-        "</b></p></center>" +
-        '<div id="' +
-        m.name +
-        '">' +
-        "<button onclick=\"switchPopupContent('" +
-        m.name +
-        "', 'text')\">Mitlesen</button>" +
-        '<p><a href="' +
-        m.img_src +
-        '" target="_blank" rel="noopener noreferrer">' +
-        '<img src="' +
-        m.img +
-        '"' +
-        ">" +
-        "</a></p>" +
-        "</div>",
+      `<center>
+         <p>
+           <b>${m.title}</b>
+         </p>
+       </center>
+       <div id="${m.name}">
+         <button onclick="switchPopupContent('${m.name}', 'text')">Mitlesen</button>
+           <p>
+             <a href="${m.img_src}" target="_blank" rel="noopener noreferrer">
+               <img src="${m.img}">
+             </a>
+           </p>
+       </div>`,
       { maxWidth: 500, maxHeight: 700, autoPan: "false", keepInView: "false" }
     )
     .on("click", markerOpenEvent);
@@ -56,26 +51,11 @@ function switchPopupContent(marker, image_or_text) {
   for (m of markers) {
     if (m.name === marker) {
       if (image_or_text === "text")
-        div.innerHTML =
-          "<button onclick=\"switchPopupContent('" +
-          m.name +
-          "', 'image')\">Mitgucken</button>" +
-          "<p>" +
-          m.text +
-          "<p>";
+        div.innerHTML = `<button onclick="switchPopupContent('${m.name}', 'image')">Mitgucken</button> <p>${m.text}<p>`;
       else
         div.innerHTML =
-          "<button onclick=\"switchPopupContent('" +
-          m.name +
-          "', 'text')\">Mitlesen</button>" +
-          '<p><a href="' +
-          m.img_src +
-          '" target="_blank" rel="noopener noreferrer">' +
-          '<img src="' +
-          m.img +
-          '"' +
-          ">" +
-          "</a></p>";
+          `<button onclick="switchPopupContent('${m.name}', 'text')">Mitlesen</button> <p>${m.text}<p>` +
+          `<p><a href="${m.img_src}" target="_blank" rel="noopener noreferrer"><img src="${m.img}"></a></p>`;
       break;
     }
   }
